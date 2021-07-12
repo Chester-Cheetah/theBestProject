@@ -1,0 +1,14 @@
+<div th:fragment="navigation">
+  <div th:if="${#request.isUserInRole('ROLE_ADMIN')}">
+    <button class="navigation-button"><a href="/admin/users" class="button-link">К списку юзеров</a></button>
+    <br><br>
+    <button class="navigation-button"><a href="/admin" class="button-link">На страницу админа</a></button>
+    <br><br>
+    <button class="navigation-button"><a href="/user" class="button-link">На страницу пользователя</a></button>
+  </div>
+
+  <br>
+  <form th:action="@{/logout}" method="POST">
+    <button style="height: 50px; width: 650px; font-size: 40px; color: red" type="submit">Выход</button>
+  </form>
+</div>

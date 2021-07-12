@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    .introduction-message{
+        font-size: 30px;
+    }
+    A:link {
+        font-size: 50px;
+    }
+    A:visited{
+        font-size: 50px;
+    }
+    .navigation-button {
+        width: 650px;
+        text-align: left;
+    }
+</style>
+<body>
+<div class="introduction-message">
+    <th:block th:each="msg : ${messages}">
+        <h1 th:text="${msg}"></h1>
+    </th:block>
+</div>
+<br>
+
+<div th:insert="navigation :: navigation"></div>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang = "ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список юзеров</title>
+  <style>
+    h1 {font-size: 50px}
+    TABLE {
+      font-size: 30px;
+    }
+    .simpleButton {
+      font: bold 40px Arial;
+      horiz-align: center;
+      color: blue;
+    }
+    .userButton {
+      font: bold 20px Arial;
+      text-decoration-color: blue;
+    }
+    .del{
+      font: bold 20px Arial;
+      color: hotpink;
+    }
+    .button-link{
+      font-size: 50px;
+    }
+    .navigation-button {
+      width: 650px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+<h1 align="center">Список юзеров</h1>
+<div>
+  <table border = "1" cellpadding="20px" align="center" width="100">
+    <tr>
+      <th>Имя</th>
+      <th>Пароль</th>
+      <th>email</th>
+      <th>Страна</th>
+      <th>Город</th>
+      <th>Роли</th>
+      <th th:width="300"></th>
+    </tr>>
+    <tr th:each = "unit : ${userListForYou}">
+      <td><a th:href="@{/admin/users/id{id}(id=${unit.getId()})}" th:utext="${unit.username}">username</a></td>>
+      <td th:text="${unit.password}">password</td>>
+      <td th:text="${unit.email}"> email </td>>
+      <td th:text="${unit.country}">country</td>>
+      <td th:text="${unit.city}"> city</td>>
+      <td th:text="${unit.roles}">roles</td>
+      <td>
+        <button class="userButton"><a th:href="@{/admin/edit/id{id}(id=${unit.getId()})}">Изменить</a></button>
+        <form th:method="POST" th:action="@{/admin/delete/id{id}(id=${unit.getId()})}">
+          <button class="del">Удалить</button>
+        </form>
+      </td>
+    </tr>
+  </table>
+</div>
+<br>
+
+<input type = "button" class="simpleButton" value = "Добавить нового пользователя"
+       onclick="window.location.href = '/admin/new'"/>
+<br><br><br><br>
+
+<div th:insert="navigation :: navigation"></div>
+
+</body>
+</html>

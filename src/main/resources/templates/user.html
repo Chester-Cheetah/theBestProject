@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<style>
+  .introduction-message{
+    font-size: 30px;
+  }
+  TABLE {
+    font-size: 30px;
+  }
+  A:link {
+    font-size: 50px;
+  }
+  A:visited{
+    font-size: 50px;
+  }
+  .navigation-button {
+    width: 650px;
+    text-align: left;
+  }
+</style>
+<body>
+<div class="introduction-message">
+  <th:block th:each="msg : ${messages}">
+    <h1 th:text="${msg}"></h1>
+  </th:block>
+</div>
+<br>
+
+
+<div>
+  <table border = "1" cellpadding="20px" align="center" width="100">
+    <tr>
+      <td>Имя пользователя</td>
+      <td th:text="${profile.username}">username</td>
+    </tr>
+    <tr>
+      <td>Пароль</td>
+      <td th:text="${profile.password}">password</td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td th:text="${profile.email}">email</td>
+    </tr>
+    <tr>
+      <td>Страна</td>
+      <td th:text="${profile.country}">country</td>
+    </tr>
+    <tr>
+      <td>Город</td>
+      <td th:text="${profile.city}">city</td>
+    </tr>
+    <tr>
+      <td>Роли</td>
+      <td th:text="${profile.roles}">roles</td>
+    </tr>
+  </table>
+</div>
+
+<div th:insert="navigation :: navigation"></div>
+
+</body>
+
+</html>
