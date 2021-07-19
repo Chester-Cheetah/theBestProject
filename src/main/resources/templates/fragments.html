@@ -1,0 +1,12 @@
+<nav th:fragment="header" class="navbar navbar-dark bg-dark shadow-sm">
+  <div class="container-fluid">
+    <p class="navbar-brand text-white">
+      <span th:text="${headerMessage}"></span>
+    <form th:action="@{/logout}" method="post">
+      <button type="submit" class="btn btn-dark text-secondary">Logout</button>
+    </form>
+  </div>
+</nav>
+
+
+

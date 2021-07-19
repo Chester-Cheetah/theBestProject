@@ -19,18 +19,9 @@ public class UserDaoImpl implements UserDAO {
         return manager.createQuery("select u from User u", User.class).getResultList();
     }
 
-
     @Override
     public void save(User user) {
         manager.persist(user);
-    }
-
-
-    @Override
-    public User getUserByName(String username){
-        TypedQuery<User> query = manager.createQuery("select u from User u where u.username = :username", User.class);
-        query.setParameter("username", username);
-        return query.getResultList().stream().findFirst().orElse(null);
     }
 
     @Override

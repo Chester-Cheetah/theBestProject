@@ -21,10 +21,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = dao.getUserByName(s);
+        User user = dao.getUserByEmail(s);
         if (user == null) {
-            throw new UsernameNotFoundException(String.format("Пользователь с именем %s не найден", s));
+            throw new UsernameNotFoundException("Пользователь с таким email не найден");
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getAuthorities());
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), user.getAuthorities());
     }
 }

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.StringJoiner;
 
 @Entity
 @Table (name = "users")
@@ -17,20 +18,20 @@ public class User implements UserDetails {
     @Column
     private int id;
 
-    @Column (length = 50, nullable = false, unique = true)
-    private String username;
+    @Column (length = 50, nullable = false)
+    private String firstName;
 
     @Column (length = 50, nullable = false)
-    private String password;
+    private String lastName;
+
+    @Column
+    private int age;
 
     @Column (length = 50, nullable = false, unique = true)
     private String email;
 
-    @Column
-    private String country;
-
-    @Column
-    private String city;
+    @Column (length = 50, nullable = false)
+    private String password;
 
     @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable (name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -39,21 +40,20 @@ public class User implements UserDetails {
 
     public User() {}
 
-    public User(String username, String password, String email, String country, String city) {
-        this.username = username;
-        this.password = password;
+    public User(String email, String password, String firstName, String lastName, int age) {
         this.email = email;
-        this.country = country;
-        this.city = city;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
     }
 
     public int getId() {
         return id;
     }
 
-    @Override
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
     @Override
@@ -86,52 +86,65 @@ public class User implements UserDetails {
         return password;
     }
 
-    public String getEmail() {
+    @Override
+    public String getUsername() {
         return email;
     }
 
-    public String getCountry() {
-        return country;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getCity() {
-        return city;
+    public String getLastName() {
+        return lastName;
+    }
+
+    public int getAge() {
+        return age;
     }
 
     public Set<Role> getRoles() {
         return roles;
     }
 
+    public String getRolesString () {
+        StringJoiner result = new StringJoiner(" ");
+        roles.forEach(role -> result.add(role.getRoleNameWithoutPrefix()));
+        return result.toString();
+    }
+
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setUsername(String name) {
-        this.username = name;
-    }
-
-    public void setPassword(String birthYear) {
-        this.password = birthYear;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
-    @Override
-    public String toString() {
-        return String.format("%s, пароль %s, email %s, %s, %s", username, password, email, country, city);
-    }
+
+
+//    @Override
+//    public String toString() {
+//        return String.format("%s, пароль %s, email %s, %s, %s", email, password, firstName, lastName, age);
+//    }
 }

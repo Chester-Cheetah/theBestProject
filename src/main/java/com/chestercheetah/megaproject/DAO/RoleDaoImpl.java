@@ -28,7 +28,7 @@ public class RoleDaoImpl implements RoleDAO {
 
     @Override
     public Role getRole (String roleName){
-        String role = roleName.startsWith("ROLE_") ? roleName : "ROLE_" + roleName;
+        String role = roleName.startsWith("ROLE_") ? roleName.toUpperCase() : "ROLE_" + roleName.toUpperCase();
         return manager.find(Role.class, role);
     }
 }

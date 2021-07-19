@@ -17,7 +17,7 @@ public class RoleServiceImpl implements RoleService {
 
     private static final List <Role> rolesForUser = new ArrayList<>();
 
-    {
+    static {
         String [] roleNamesENG = {"USER", "ADMIN"};
         String [] roleNamesRUS = {"Юзер", "Админ"};
         for (int i = 0; i < roleNamesENG.length; i++) {
@@ -40,16 +40,16 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public Role getRole(String role) {
+        return dao.getRole(role);
+    }
+
+    @Override
     public void saveRoleListIfNotSaved() {
         for (Role role : rolesForUser) {
             try {
                 dao.add(role);
             } catch (Exception ignored) {}
         }
-    }
-
-    @Override
-    public Role getRole(String role) {
-        return dao.getRole(role);
     }
 }

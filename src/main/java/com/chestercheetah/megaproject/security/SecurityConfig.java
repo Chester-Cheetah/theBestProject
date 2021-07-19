@@ -31,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setForceEncoding(true);
         http.addFilterBefore(filter, CsrfFilter.class);
         http.formLogin()
+                .loginPage("/login")
                 .successHandler(new LoginSuccessHandler())
                 .loginProcessingUrl("/login")
                 .usernameParameter("j_username")

@@ -23,14 +23,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean save(User user) {
-        if ((dao.getUserByEmail(user.getEmail()) == null) && (dao.getUserByName(user.getUsername()) == null)) {
+    public void save(User user) {
+        if (dao.getUserByEmail(user.getEmail()) == null) {
             dao.save(user);
-            return true;
         }
-        return false;
     }
-
 
     @Override
     public User getUserByID(int id) {
@@ -38,15 +35,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean update(User user) {
-        User anotherUserWithTheSameEmail = dao.getUserByEmail(user.getEmail());
-        User anotherUserWithTheSameUsername = dao.getUserByName(user.getUsername());
-        if ((anotherUserWithTheSameEmail == null || anotherUserWithTheSameEmail.getId() == user.getId())
-                && (anotherUserWithTheSameUsername == null || anotherUserWithTheSameUsername.getId() == user.getId())) {
+    public void update(User user) {
+        User existedUserWithTheSameEmail = dao.getUserByEmail(user.getEmail());
+        if (existedUserWithTheSameEmail == null || existedUserWithTheSameEmail.getId() == user.getId()) {
             dao.update(user);
-            return true;
         }
-        return false;
     }
 
     @Override
@@ -54,10 +47,8 @@ public class UserServiceImpl implements UserService {
         dao.delete(id);
     }
 
-
-
     @Override
-    public User getUserByName (String name) {
-        return dao.getUserByName(name);
+    public User getUserByEmail(String email) {
+        return dao.getUserByEmail(email);
     }
 }
