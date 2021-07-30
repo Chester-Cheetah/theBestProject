@@ -5,7 +5,6 @@ import com.chestercheetah.megaproject.entity.User;
 import com.chestercheetah.megaproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
@@ -22,7 +21,7 @@ public class ViewController {
     }
 
     @GetMapping ("/user")
-    public String printUserPage (Model model, Principal principal) {
+    public String printUserPage () {
         return "user";
     }
 
@@ -37,7 +36,8 @@ public class ViewController {
     }
 
     @GetMapping
-    public String redirectUserPage() {
-        return "redirect:/user";
+    public String redirectUserPage(Principal principal) {
+        User authorized = userService.getUserByEmail(principal.getName());
+        return authorized.getRolesString().contains("ADMIN") ? "redirect:/admin" : "redirect:/user";
     }
 }

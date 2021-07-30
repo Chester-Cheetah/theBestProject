@@ -2,7 +2,7 @@
 
     <div class="modal fade" tabindex="-1" id="user-edition-modal"
          aria-labelledby="editModalLabel"
-         aria-hidden="true">
+         aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -15,7 +15,7 @@
                         <img alt="Close" src="https://img.icons8.com/office/40/000000/close-window.png"/>
                     </button>
                 </div>
-                <form class="user-form-edition" onsubmit="userSubmitAction(event, this, this.id.value)">
+                <form class="user-form-edition" id="user-form-edition" onsubmit="userSubmitAction(event, this, this.id.value)">
                     <div class="modal-body col-md text-center">
 
                         <label for="edition-form-id"><b>ID</b></label>
@@ -42,7 +42,7 @@
                         <input name="email" type="email"
                                class="form-control" id="edition-form-email"
                                required/>
-                        <p class="validation-message" style="color: red" hidden="hidden">Указанный email занят</p>
+                        <p id="edition-validation-message" style="color: red"></p>
                         <br>
                         <label for="edition-form-password"><b>Password</b></label>
                         <input name="password" type="password"

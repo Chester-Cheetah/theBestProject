@@ -26,5 +26,4 @@ public class UserRestController {
     public User authorizedUser (Principal principal) {
         return userService.getUserByEmail(principal.getName());
     }
-
 }
