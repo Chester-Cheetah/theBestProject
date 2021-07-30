@@ -1,0 +1,74 @@
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="userEditionModal">
+
+    <div class="modal fade" tabindex="-1" id="user-edition-modal"
+         aria-labelledby="editModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit user</h5>
+
+                    <button type="button" class="close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                    onclick="closeButton()">
+                        <img alt="Close" src="https://img.icons8.com/office/40/000000/close-window.png"/>
+                    </button>
+                </div>
+                <form class="user-form-edition" onsubmit="userSubmitAction(event, this, this.id.value)">
+                    <div class="modal-body col-md text-center">
+
+                        <label for="edition-form-id"><b>ID</b></label>
+                        <input name="id" type="text" class="form-control"
+                               id="edition-form-id" disabled/>
+
+                        <br>
+                        <label for="edition-form-firstName"><b>First name</b></label>
+                        <input name="firstName" type="text"
+                               class="form-control" id="edition-form-firstName"
+                               required/>
+                        <br>
+                        <label for="edition-form-lastName"><b>Last name</b></label>
+                        <input name="lastName" type="text"
+                               class="form-control" id="edition-form-lastName"
+                               required/>
+                        <br>
+                        <label for="edition-form-age"><b>Age</b></label>
+                        <input name="age" type="number"
+                               class="form-control" id="edition-form-age"
+                               required/>
+                        <br>
+                        <label for="edition-form-email"><b>Email</b></label>
+                        <input name="email" type="email"
+                               class="form-control" id="edition-form-email"
+                               required/>
+                        <p class="validation-message" style="color: red" hidden="hidden">Указанный email занят</p>
+                        <br>
+                        <label for="edition-form-password"><b>Password</b></label>
+                        <input name="password" type="password"
+                               class="form-control" id="edition-form-password"
+                               required/>
+                        <br>
+                        <label for="edition-form-roles"><b>Role</b></label>
+                        <select multiple class="form-control" id="edition-form-roles"
+                                name="roleName" size="2" required>
+                            <option value="ROLE_ADMIN">ADMIN</option>
+                            <option value="ROLE_USER">USER</option>
+                        </select>
+                        <br><br>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal" onclick="closeButton()">Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            Edit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</th:block>

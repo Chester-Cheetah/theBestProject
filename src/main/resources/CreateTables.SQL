@@ -21,17 +21,10 @@ alter table users
 
 alter table users modify id int auto_increment;
 
-create table if not exists roles
-(
-    roleName VARCHAR(50) not null,
-    roleNameRUS VARCHAR(50) not null
-);
+create table if not exists roles (roleName VARCHAR(50) not null);
 
 create unique index roles_roleName_uindex
     on roles (roleName);
-
-create unique index roles_roleNameRUS_uindex
-    on roles (roleNameRUS);
 
 alter table roles
     add constraint roles_pk
@@ -54,11 +47,11 @@ alter table user_role
 insert into users (id, firstName, lastName, age, email, password)
 VALUES (1, 'Админ', 'Админов', 30, 'ADMIN', 'admin');
 
-insert into roles (roleName, roleNameRUS)
-VALUES ('ROLE_ADMIN', 'Админ');
+insert into roles (roleName)
+VALUES ('ROLE_ADMIN');
 
-insert into roles (roleName, roleNameRUS)
-VALUES ('ROLE_USER', 'Юзер');
+insert into roles (roleName)
+VALUES ('ROLE_USER');
 
 insert into user_role (user_id, role_id)
 VALUES (1, 'ROLE_ADMIN');

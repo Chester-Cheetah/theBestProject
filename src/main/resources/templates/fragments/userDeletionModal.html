@@ -1,0 +1,61 @@
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="userDeletionModal">
+
+  <div class="modal fade" id="user-deletion-modal" tabindex="-1"
+       aria-labelledby="deletionModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deletionModalLabel">Delete user</h5>
+          <button type="button" class="close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close">
+            <img alt="Close" src="https://img.icons8.com/office/40/000000/close-window.png"/>
+          </button>
+        </div>
+
+        <form class="user-form-deletion" onsubmit="deleteRow(event, this.id.value())">
+          <div class="modal-body col-md text-center">
+
+            <label for="user-deletion-placeholder-id"><b>ID</b></label>
+            <input name="id" type="text" class="form-control"
+                   id="user-deletion-placeholder-id" disabled/>
+            <br>
+
+            <label for="user-deletion-placeholder-firstName"><b>First name</b></label>
+            <input name="firstName" type="text" class="form-control"
+                   id="user-deletion-placeholder-firstName" disabled/>
+            <br>
+            <label for="user-deletion-placeholder-lastName"><b>Last name</b></label>
+            <input name="lastName" type="text" class="form-control"
+                   id="user-deletion-placeholder-lastName" disabled/>
+            <br>
+            <label for="user-deletion-placeholder-age"><b>Age</b></label>
+            <input name="age" type="number" class="form-control"
+                   id="user-deletion-placeholder-age" disabled/>
+            <br>
+            <label for="user-deletion-placeholder-email"><b>E-mail</b></label>
+            <input name="email" type="text" class="form-control"
+                   id="user-deletion-placeholder-email" disabled/>
+            <br>
+
+            <label for="user-deletion-placeholder-roles"><b>Role</b></label>
+            <select multiple class="form-control" id="user-deletion-placeholder-roles"
+                    name="updatedRoles" size="2" disabled>
+              <option value="ROLE_ADMIN">ADMIN</option>
+              <option value="ROLE_USER">USER</option>
+            </select>
+            <br><br>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">Close
+            </button>
+            <button type="submit" class="btn btn-danger">Delete
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</th:block>

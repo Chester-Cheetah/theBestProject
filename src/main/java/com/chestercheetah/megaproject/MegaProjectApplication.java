@@ -18,5 +18,6 @@ public class MegaProjectApplication {
 		} catch (Exception ignored) {}
 
 		SpringApplication.run(MegaProjectApplication.class, args);
+
 	}
 }

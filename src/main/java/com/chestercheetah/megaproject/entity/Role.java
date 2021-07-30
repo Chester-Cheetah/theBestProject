@@ -1,6 +1,7 @@
 package com.chestercheetah.megaproject.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Column;
@@ -16,17 +17,13 @@ public class Role implements GrantedAuthority {
 
     @Id
     @Column (name = "roleName", unique = true)
+    @JsonView(Views.userInfo.class)
     private String roleName;
-
-
-    @Column (name = "roleNameRUS", unique = true)
-    private String roleNameRUS;
 
     public Role() {}
 
-    public Role(String roleName, String roleNameRUS) {
-        this.roleName = roleName.startsWith("ROLE_") ? roleName : "ROLE_" + roleName;
-        this.roleNameRUS = roleNameRUS;
+    public Role(String roleName) {
+        this.roleName = roleName.startsWith("ROLE_") ? roleName.toUpperCase() : "ROLE_" + roleName.toUpperCase();
     }
 
     public String getRoleName() {
@@ -34,20 +31,13 @@ public class Role implements GrantedAuthority {
     }
 
     public String getRoleNameWithoutPrefix() {
-        return roleName.startsWith("ROLE_") ? roleName.substring(5) : roleName;
+        return roleName.startsWith("ROLE_") ? roleName.substring(5).toUpperCase() : roleName.toUpperCase();
     }
 
     public void setRoleName(String roleName) {
         this.roleName = roleName.startsWith("ROLE_") ? roleName : "ROLE_" + roleName;
     }
 
-    public String getRoleNameRUS() {
-        return roleNameRUS;
-    }
-
-    public void setRoleNameRUS(String roleNameRUS) {
-        this.roleNameRUS = roleNameRUS;
-    }
 
     @Override
     public String getAuthority() {

@@ -1,5 +1,6 @@
 package com.chestercheetah.megaproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,18 +17,23 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
+    @JsonView(Views.userInfo.class)
     private int id;
 
     @Column (length = 50, nullable = false)
+    @JsonView(Views.userInfo.class)
     private String firstName;
 
     @Column (length = 50, nullable = false)
+    @JsonView(Views.userInfo.class)
     private String lastName;
 
     @Column
+    @JsonView(Views.userInfo.class)
     private int age;
 
     @Column (length = 50, nullable = false, unique = true)
+    @JsonView(Views.userInfo.class)
     private String email;
 
     @Column (length = 50, nullable = false)
@@ -35,6 +41,7 @@ public class User implements UserDetails {
 
     @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable (name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JsonView(Views.userInfo.class)
     private Set<Role> roles = new LinkedHashSet<>();
 
 
@@ -107,6 +114,7 @@ public class User implements UserDetails {
         return roles;
     }
 
+    @JsonView(Views.userInfo.class)
     public String getRolesString () {
         StringJoiner result = new StringJoiner(" ");
         roles.forEach(role -> result.add(role.getRoleNameWithoutPrefix()));
@@ -137,14 +145,21 @@ public class User implements UserDetails {
         this.age = age;
     }
 
+
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
-
-
-//    @Override
-//    public String toString() {
-//        return String.format("%s, пароль %s, email %s, %s, %s", email, password, firstName, lastName, age);
-//    }
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }

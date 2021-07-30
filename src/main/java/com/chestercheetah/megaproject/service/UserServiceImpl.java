@@ -23,10 +23,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(User user) {
+    public int save(User user) {
         if (dao.getUserByEmail(user.getEmail()) == null) {
-            dao.save(user);
+            return dao.save(user);
         }
+        return -1;
     }
 
     @Override
@@ -35,11 +36,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(User user) {
+    public boolean update(User user) {
         User existedUserWithTheSameEmail = dao.getUserByEmail(user.getEmail());
-        if (existedUserWithTheSameEmail == null || existedUserWithTheSameEmail.getId() == user.getId()) {
-            dao.update(user);
-        }
+        boolean result = existedUserWithTheSameEmail == null || existedUserWithTheSameEmail.getId() == user.getId();
+        if (result) dao.update(user);
+        return result;
     }
 
     @Override

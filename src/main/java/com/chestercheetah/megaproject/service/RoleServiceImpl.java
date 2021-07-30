@@ -5,8 +5,9 @@ import com.chestercheetah.megaproject.entity.Role;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -15,15 +16,7 @@ public class RoleServiceImpl implements RoleService {
 
     private final RoleDAO dao;
 
-    private static final List <Role> rolesForUser = new ArrayList<>();
-
-    static {
-        String [] roleNamesENG = {"USER", "ADMIN"};
-        String [] roleNamesRUS = {"Юзер", "Админ"};
-        for (int i = 0; i < roleNamesENG.length; i++) {
-            rolesForUser.add(new Role(roleNamesENG[i], roleNamesRUS[i]));
-        }
-    }
+    private static final Role [] rolesForUser = {new Role("USER"), new Role("USER")};
 
     public RoleServiceImpl(RoleDAO dao) {
         this.dao = dao;
@@ -51,5 +44,17 @@ public class RoleServiceImpl implements RoleService {
                 dao.add(role);
             } catch (Exception ignored) {}
         }
+    }
+
+    @Override
+    public Set<Role> convertRoleStringArrayToRoleSet(String[] selectedRoles) {
+        Set<Role> rolesForNewUser = new LinkedHashSet<>();
+        for (String role : selectedRoles) {
+            rolesForNewUser.add(getRole(role));
+        }
+        if (rolesForNewUser.isEmpty()){
+            rolesForNewUser.add(getRole("ROLE_USER"));
+        }
+        return rolesForNewUser;
     }
 }

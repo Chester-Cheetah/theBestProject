@@ -20,8 +20,10 @@ public class UserDaoImpl implements UserDAO {
     }
 
     @Override
-    public void save(User user) {
+    public int save(User user) {
         manager.persist(user);
+        manager.flush();
+        return user.getId();
     }
 
     @Override
